@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewmodel"
+            type="com.cactus.marvelcomics.ui.character.domain.listCharacters.ItemCharacterViewModel" />
+
+
+    </data>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/container_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_stack_xs"
+        app:cardBackgroundColor="@color/colorPrimaryLight"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_stack_xs"
+            android:onClick="@{()-> viewmodel.onClick()}"
+            android:background="@color/colorPrimaryLight">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_photo_character"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                setImageUrl="@{viewmodel.thumbnail}"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="3:2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/spacing_stack_xs"
+                android:text="@{viewmodel.name}"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/font_size_sm"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_photo_character"
+                tools:text="Character" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="@dimen/spacing_stack_xs"
+                android:onClick="@{()-> viewmodel.setFavorite()}"
+                android:src="@{viewmodel.isFavorite() ? @drawable/ic_star : @drawable/ic_star_border}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:src="@drawable/ic_star_border"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</layout>
