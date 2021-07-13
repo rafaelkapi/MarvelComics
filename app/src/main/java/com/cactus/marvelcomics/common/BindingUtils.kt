@@ -1,13 +1,17 @@
-package com.cactus.cifracherry.common
+    package com.cactus.cifracherry.common
 
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cactus.marvelcomics.common.BindableAdapter
 import com.squareup.picasso.Picasso
+import com.squareup.picasso.Target
+import java.lang.Exception
 
-@BindingAdapter("data")
+    @BindingAdapter("data")
 fun <T> RecyclerView.setRecyclerViewProperties(items: List<T>)  {
     if (this.adapter is BindableAdapter<*>) {
         (this.adapter as BindableAdapter<T>).setData(items)
@@ -38,6 +42,19 @@ fun ImageView.bindImageUrl(url: String?) {
     if (url != null && url.isNotBlank()) {
         Picasso.get()
             .load(url)
-            .into(this)
+            .into(object : Target {
+                override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
+                    this@bindImageUrl.setImageBitmap(bitmap)
+                }
+
+                override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
+                    this@bindImageUrl.setImageDrawable(errorDrawable)
+                }
+
+                override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
+                    this@bindImageUrl.setImageDrawable(placeHolderDrawable)
+                }
+
+            })
     }
 }

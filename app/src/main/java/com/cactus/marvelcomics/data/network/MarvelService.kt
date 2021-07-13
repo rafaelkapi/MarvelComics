@@ -9,7 +9,7 @@ import retrofit2.http.Query
 interface MarvelService {
 
     @GET("v1/public/characters")
-    fun getCharacters(@Query("limit") limit: Int,
+     suspend fun getCharacters(@Query("limit") limit: Int,
                       @Query("offset") offset: Int): Response<DataWrapper>
 
     @GET("v1/public/characters")

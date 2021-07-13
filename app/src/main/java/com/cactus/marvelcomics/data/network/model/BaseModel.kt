@@ -20,6 +20,7 @@ package com.cactus.marvelcomics.data.network.model
         var description: String? = null,
         var thumbnail: MarvelImage? = null,
 
+
         var series: BaseList? = null,
         var comics: BaseList? = null
     )

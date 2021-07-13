@@ -6,7 +6,7 @@ import com.cactus.marvelcomics.data.network.MarvelService
 import javax.inject.Inject
 
 interface CharacterRepository {
-    suspend fun getCharacterList(limit: Int = 20, offset: Int = 0): OperationResult
+    suspend fun getCharacterList(limit: Int , offset: Int ): OperationResult
 //    fun getCharacterNameStartsWith(limit: Int = 20, offset: Int = 0, startsWith: String = ""): Single<MarvelCharacterDataContainer>
 //    fun getCharacter(id: Int): Single<MarvelCharacterDataContainer>
 }

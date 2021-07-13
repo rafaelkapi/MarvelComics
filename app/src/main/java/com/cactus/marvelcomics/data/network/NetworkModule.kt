@@ -6,7 +6,8 @@ import br.com.marvel.network.LoggingInterceptor
 import br.com.marvel.network.PrivateKey
 import br.com.marvel.network.SubscriptionKey
 import com.cactus.marvelcomics.BuildConfig
-import com.google.gson.Gson
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -16,7 +17,7 @@ import okhttp3.ResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import java.lang.reflect.Type
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
@@ -56,10 +57,14 @@ class NetworkModule {
         return Cache(application.cacheDir, cacheSize)
     }
 
+
+
     @Provides
     @Singleton
-    fun provideGson(): Gson = Gson()
-
+    fun provideMoshi(): Moshi =
+        Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
 
     @Singleton
     @Provides
@@ -68,10 +73,10 @@ class NetworkModule {
         subscriptionKeyInterceptor: SubscriptionKeyInterceptor
     ): OkHttpClient =
         OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
+            .readTimeout(10, TimeUnit.SECONDS)
+            .connectTimeout(10, TimeUnit.SECONDS)
             .addInterceptor(subscriptionKeyInterceptor)
-            .readTimeout(60, TimeUnit.SECONDS)
-            .connectTimeout(60, TimeUnit.SECONDS)
+            .addInterceptor(loggingInterceptor)
             .build()
 
 
@@ -79,14 +84,14 @@ class NetworkModule {
     @Provides
     fun retrofit(
         okhttpClient: OkHttpClient,
-        gson: Gson,
+        moshi: Moshi,
         @BaseUrl baseUrl: String
     ): Retrofit =
         Retrofit.Builder()
             .client(okhttpClient)
             .baseUrl(baseUrl)
             .addConverterFactory(nullOnEmptyConverterFactory)
-            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addConverterFactory(MoshiConverterFactory.create(moshi).asLenient())
             .build()
 
 

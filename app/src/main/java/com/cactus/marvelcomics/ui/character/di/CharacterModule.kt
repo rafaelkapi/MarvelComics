@@ -2,6 +2,7 @@ package com.cactus.marvelcomics.ui.character.di
 
 import androidx.lifecycle.ViewModel
 import com.cactus.marvelcomics.common.ViewModelKey
+import com.cactus.marvelcomics.common.base.BaseViewModel
 import com.cactus.marvelcomics.di.FragmentScope
 import com.cactus.marvelcomics.ui.character.presentation.CharactersFragment
 import com.cactus.marvelcomics.ui.character.presentation.CharactersViewModel

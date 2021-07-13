@@ -1,6 +1,6 @@
 package com.cactus.marvelcomics.data.network
 
-import br.com.marvel.network.PrivateKey
+import  br.com.marvel.network.PrivateKey
 import br.com.marvel.network.SubscriptionKey
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject

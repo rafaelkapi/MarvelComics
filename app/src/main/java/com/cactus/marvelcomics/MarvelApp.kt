@@ -15,6 +15,7 @@ class MarvelApp : DaggerApplication() {
             .factory()
             .create(this)
 
+        appComponent.inject(this)
 
         return appComponent
     }

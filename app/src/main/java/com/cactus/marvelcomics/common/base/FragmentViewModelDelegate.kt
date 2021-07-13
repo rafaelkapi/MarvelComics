@@ -1,6 +1,7 @@
 package com.cactus.marvelcomics.common.base
 
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.cactus.marvelcomics.common.ViewModelFactory
 import kotlin.properties.ReadWriteProperty
@@ -14,7 +15,7 @@ class FragmentViewModelDelegate<T : BaseViewModel>(
 ) : ReadWriteProperty<Fragment, T> {
 
     override fun getValue(thisRef: Fragment, property: KProperty<*>): T {
-        return ViewModelProviders.of(fragment, vmFactory.invoke()).get(clazz.java).apply {
+        return ViewModelProvider(fragment, vmFactory.invoke()).get(clazz.java).apply {
             thisRef.lifecycle.addObserver(this)
         }
     }

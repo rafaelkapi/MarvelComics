@@ -1,6 +1,7 @@
 package com.cactus.marvelcomics.data
 
 import androidx.lifecycle.*
+import com.cactus.marvelcomics.data.network.model.DataWrapper
 import kotlinx.coroutines.Dispatchers
 import java.lang.reflect.Array.get
 
@@ -12,12 +13,26 @@ import java.lang.reflect.Array.get
  * [Result.Status.ERROR] - if error has occurred from any source
  * [Result.Status.LOADING]
  */
-fun <T> resultLiveData(
-    databaseQuery: (() -> LiveData<T>)?,
+fun resultLiveData(
+    databaseQuery: (() -> LiveData<OperationResult>)?,
     networkCall: suspend () -> OperationResult,
-    saveCallResult: (suspend (OperationResult?) -> Unit)? ): LiveData<OperationResult> =
+    saveCallResult: (suspend (OperationResult?) -> Unit)?
+): LiveData<OperationResult> =
 
     liveData(Dispatchers.IO) {
         emit(OperationResult.Loading)
-        emit(networkCall.invoke())
+
+        networkCall.invoke().let { response ->
+            when (response) {
+                is OperationResult.Success<*> -> {
+                    val dataWrapper = response.data as DataWrapper
+                    saveCallResult?.invoke(OperationResult.Success(dataWrapper.data?.results))
+                    // No Local Data Source
+                    emit(OperationResult.Success(dataWrapper.data?.results))
+                }
+                is OperationResult.Error -> {
+                    emit(response)
+                }
+            }
+        }
     }

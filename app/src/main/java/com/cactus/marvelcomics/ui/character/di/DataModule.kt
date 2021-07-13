@@ -1,5 +1,6 @@
 package com.cactus.marvelcomics.ui.character.di
 
+import android.annotation.SuppressLint
 import com.cactus.marvelcomics.data.network.MarvelService
 import com.cactus.marvelcomics.ui.character.data.CharacterRepository
 import com.cactus.marvelcomics.ui.character.data.CharacterRepositoryImp

@@ -3,18 +3,16 @@ package com.cactus.marvelcomics.ui.character.domain.listCharacters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.cactus.marvelcomics.common.BindableAdapter
 import com.cactus.marvelcomics.databinding.ItemCharacterBinding
-import com.cactus.marvelcomics.ui.character.domain.MarvelCharacter
 import com.cactus.marvelcomics.common.CallClickCharacter
+import com.cactus.marvelcomics.data.network.model.MarvelCharacter
 
 
 class CharactersAdapter(
     private val onClick: CallClickCharacter = null,
     private val setFavorite: CallClickCharacter = null
-) : RecyclerView.Adapter<CharactersViewHolder>(), BindableAdapter<MarvelCharacter> {
+) : RecyclerView.Adapter<CharactersViewHolder>() {
 
-    private var listCharacters = mutableListOf<MarvelCharacter>()
 
     var list: List<MarvelCharacter> = emptyList()
         set(value) {
@@ -22,23 +20,7 @@ class CharactersAdapter(
             notifyDataSetChanged()
         }
 
-    override fun setData(items: List<MarvelCharacter>) {
-        listCharacters = items as MutableList<MarvelCharacter>
-        notifyDataSetChanged()
-    }
 
-    override fun deleteItem(position: Int?) {
-        position?.let {
-            listCharacters.removeAt(it)
-            notifyItemRemoved(it)
-            notifyItemRangeChanged(it, listCharacters.size)
-        }
-    }
-
-
-    override fun changedPositions(positions: Set<Int>) {
-        positions.forEach(this::notifyItemChanged)
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharactersViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -49,11 +31,11 @@ class CharactersAdapter(
     }
 
     override fun onBindViewHolder(holder: CharactersViewHolder, position: Int) {
-        var character = listCharacters[position]
+        var character = list[position]
         holder.bind(character, onClick, setFavorite)
     }
 
-    override fun getItemCount(): Int = listCharacters.size
+    override fun getItemCount(): Int = list.size
 }
 
 class CharactersViewHolder(private val _binding: ItemCharacterBinding) :
@@ -66,7 +48,8 @@ class CharactersViewHolder(private val _binding: ItemCharacterBinding) :
     ) {
         _binding.viewmodel?.apply {
             name.set(_character.name)
-            thumbnail.set(_character.thumbnail)
+            thumbnail.set(_character.thumbnail?.uri
+            )
 
             callOnClick = onClick
             callSetFavorite = setFavorite
