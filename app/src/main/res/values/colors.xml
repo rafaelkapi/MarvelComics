@@ -5,4 +5,5 @@
     <color name="colorAccent">#13F0D6</color>
     <color name="textColorPrimary">#fff</color>
     <color name="textColorSecondary">#bbb</color>
+    <color name="tab_indicator_color">#699F38</color>
 </resources>

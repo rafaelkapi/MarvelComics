@@ -9,11 +9,9 @@
 
         <variable
             name="viewmodel"
-            type="com.cactus.marvelcomics.ui.character.domain.listCharacters.ItemCharacterViewModel" />
-
+            type="com.cactus.marvelcomics.features.characters.domain.listCharacters.ItemCharacterViewModel" />
 
     </data>
-
 
     <androidx.cardview.widget.CardView
         android:id="@+id/container_card"
@@ -21,21 +19,21 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_stack_xs"
         app:cardBackgroundColor="@color/colorPrimaryLight"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="8dp">
+        app:cardCornerRadius="@dimen/spacing_stack_xxs"
+        app:cardElevation="@dimen/spacing_stack_xxs">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_stack_xs"
-            android:onClick="@{()-> viewmodel.onClick()}"
             android:background="@color/colorPrimaryLight">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_photo_character"
+                setImageUrl="@{viewmodel.thumbnail}"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                setImageUrl="@{viewmodel.thumbnail}"
+                android:onClick="@{()-> viewmodel.onClick()}"
                 android:scaleType="centerCrop"
                 app:layout_constraintDimensionRatio="3:2"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -44,9 +42,12 @@
                 tools:src="@tools:sample/backgrounds/scenic" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/spacing_stack_xs"
+                android:id="@+id/name_character"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_stack_xs"
+                android:layout_marginTop="@dimen/spacing_stack_xs"
+                android:onClick="@{()-> viewmodel.onClick()}"
                 android:text="@{viewmodel.name}"
                 android:textColor="@color/textColorPrimary"
                 android:textSize="@dimen/font_size_sm"
@@ -55,19 +56,19 @@
                 tools:text="Character" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginEnd="@dimen/spacing_stack_xs"
+                android:id="@+id/iconFavorite"
+                android:layout_width="@dimen/radius_shadow_favorite"
+                android:layout_height="@dimen/radius_shadow_favorite"
+                android:background="@drawable/shape_circle"
                 android:onClick="@{()-> viewmodel.setFavorite()}"
-                android:src="@{viewmodel.isFavorite() ? @drawable/ic_star : @drawable/ic_star_border}"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:padding="@dimen/spacing_stack_xxxs"
+                android:src="@{viewmodel.isFavorite ? @drawable/ic_star : @drawable/ic_star_border}"
+                app:layout_constraintBottom_toBottomOf="@id/iv_photo_character"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:src="@drawable/ic_star_border"
-                />
-
+                app:layout_constraintTop_toBottomOf="@id/iv_photo_character"
+                tools:src="@drawable/ic_star_border" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </androidx.cardview.widget.CardView>
 

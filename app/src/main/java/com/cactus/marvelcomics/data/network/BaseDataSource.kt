@@ -3,8 +3,6 @@ package com.cactus.marvelcomics.data.network
 import com.cactus.marvelcomics.data.OperationResult
 import retrofit2.Response
 
-//import retrofit2.Response
-
 
 abstract class BaseDataSource {
 

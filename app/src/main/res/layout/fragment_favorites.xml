@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.cactus.marvelcomics.features.favorites.presentation.FavoritesViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".features.favorites.presentation.FavoritesFragment">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/bt_layout_list_w"
+                android:layout_height="@dimen/bt_layout_list_h"
+                android:layout_marginTop="@dimen/spacing_stack_xxxs"
+                android:layout_gravity="center"
+                android:onClick="@{()-> viewmodel.changeLayoutRecyclerView()}"
+                android:src="@{viewmodel.layoutRecyclerView ? @drawable/ic_baseline_view_list_24 : @drawable/ic_baseline_grid_view_24}"
+                tools:src="@drawable/ic_baseline_view_list_24"/>
+
+            <include
+                android:id="@+id/container_characters"
+                layout="@layout/container_characters" />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

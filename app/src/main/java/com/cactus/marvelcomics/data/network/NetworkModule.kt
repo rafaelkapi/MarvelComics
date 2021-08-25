@@ -1,10 +1,6 @@
 package com.cactus.marvelcomics.data.network
 
 import android.app.Application
-import br.com.marvel.network.BaseUrl
-import br.com.marvel.network.LoggingInterceptor
-import br.com.marvel.network.PrivateKey
-import br.com.marvel.network.SubscriptionKey
 import com.cactus.marvelcomics.BuildConfig
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -49,15 +45,12 @@ class NetworkModule {
                 if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
         }
 
-
     @Provides
     @Singleton
     fun provideOkHttpCache(application: Application): Cache {
         val cacheSize: Long = 10 * 1024 * 1024
         return Cache(application.cacheDir, cacheSize)
     }
-
-
 
     @Provides
     @Singleton

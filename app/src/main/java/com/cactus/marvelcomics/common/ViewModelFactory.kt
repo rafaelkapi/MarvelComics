@@ -29,8 +29,6 @@ class ViewModelFactory @Inject constructor(private val viewModelsMap: Map<Class<
     }
 }
 
-
-
 @kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
 @MapKey
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.PROPERTY_SETTER)

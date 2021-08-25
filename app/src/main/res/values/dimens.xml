@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="tab_indicator_height">3dp</dimen>
+    <dimen name="bt_layout_list_w">35dp</dimen>
+    <dimen name="bt_layout_list_h">30dp</dimen>
+    <dimen name="distance_comics_series">224dp</dimen>
+    <dimen name="radius_shadow_arrow_back">170dp</dimen>
+    <dimen name="radius_shadow_favorite">36dp</dimen>
+    <dimen name="card_comics_w">180dp</dimen>
+    <dimen name="card_comics_h">200dp</dimen>
+    <dimen name="iv_comic_w">150dp</dimen>
+    <dimen name="iv_comic_h">200dp</dimen>
+    <dimen name="card_series_w">130dp</dimen>
+    <dimen name="card_series_h">200dp</dimen>
+</resources>

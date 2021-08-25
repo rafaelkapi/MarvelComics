@@ -1,4 +1,4 @@
-package br.com.marvel.network
+package com.cactus.marvelcomics.data.network
 
 import javax.inject.Qualifier
 

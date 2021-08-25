@@ -1,4 +1,4 @@
-    package com.cactus.cifracherry.common
+package com.cactus.marvelcomics.common
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
@@ -6,20 +6,18 @@ import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.cactus.marvelcomics.common.BindableAdapter
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
-import java.lang.Exception
 
-    @BindingAdapter("data")
-fun <T> RecyclerView.setRecyclerViewProperties(items: List<T>)  {
+@BindingAdapter("data")
+fun <T> RecyclerView.setRecyclerViewProperties(items: List<T>) {
     if (this.adapter is BindableAdapter<*>) {
         (this.adapter as BindableAdapter<T>).setData(items)
     }
 }
 
 @BindingAdapter("deleteItem")
-fun <T> RecyclerView.setDeleteItem(positions: Int?)  {
+fun <T> RecyclerView.setDeleteItem(positions: Int?) {
     if (this.adapter is BindableAdapter<*>) {
         (this.adapter as BindableAdapter<T>).deleteItem(positions)
     }
@@ -54,7 +52,6 @@ fun ImageView.bindImageUrl(url: String?) {
                 override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
                     this@bindImageUrl.setImageDrawable(placeHolderDrawable)
                 }
-
             })
     }
 }
