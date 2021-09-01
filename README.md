@@ -7,7 +7,7 @@
 
 We mobile are Marvel fans 😍, so that's why we'd like an app to list the characters and learn more about them 🚀.
 
-This app shows a list of Marvel characters, clicking on them you navigate to each character's details 👾. It is also possible to mark the character in the list. Favorite characters are kept on the device so they can be accessed offline and are shown in their own tab.
+This app shows a list of Marvel characters, clicking on them you navigate to each character's details 👾. It is also possible to mark the character in the favorite list. Favorite characters are kept on the device so they can be accessed offline and are shown in their own tab.
 
 ## API Marvel
 
