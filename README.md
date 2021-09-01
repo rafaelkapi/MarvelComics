@@ -20,6 +20,7 @@ This app consumes a REST API, for more information visit the link: https://devel
 - Architecture MVVM
 - Clean Architecture
 - Design Patterns
+- Data Binding
 - Android Jetpack 
   * Navigation
   * Live Data
